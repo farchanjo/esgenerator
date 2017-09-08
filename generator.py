@@ -15,7 +15,7 @@ parser.add_argument('--hport', type=int, help='Set Http Port', required=True)
 parser.add_argument('--cluster', type=str, help='Set Clusters Name', required=True)
 parser.add_argument('--master', type=bool, help='Is Master', required=True)
 parser.add_argument('--node', type=bool, help='Is Node Data', required=True)
-parser.add_argument('--heap', type=bool, help='Heap Size', required=True)
+parser.add_argument('--heap', type=str, help='Heap Size', required=True)
 parser.add_argument('--type', type=str, help='Choose (ND|MST|QR)', required=True)
 args = parser.parse_args()
 
