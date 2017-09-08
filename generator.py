@@ -50,5 +50,5 @@ for ins in range(0, args.instances):
         with open('{folder}/{file}'.format(folder=systemd_folder, file=systemd_file), 'w') as f:
             f.write(model.get_model_systemd(ins))
             f.close()
-        config.logger.info('{folder}/{file}'.format(folder=systemd_folder, file=systemd_file))
+        config.logger.info('{folder}/{file}.service'.format(folder=systemd_folder, file=systemd_file))
     config.logger.info('Files for {folder} created without erros'.format(folder=es_config_folder))
