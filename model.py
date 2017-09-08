@@ -33,10 +33,10 @@ def get_model_systemd(instance_number):
     return output
 
 
-def get_model_default(heap, defaultfile):
+def get_model_default(heap):
     output = ''
     with open(config.dir_path + '/defaultmodel') as f:
         for line in f:
-            output += line.format(heap=heap, defaultfile=defaultfile)
+            output += line.format(heap=heap)
         f.close()
     return output

@@ -67,7 +67,7 @@ for ins in range(0, args.instances):
     if os.path.exists(default_folder):
         with open('{default_folder}/{default_file}'.format(default_folder=default_folder,
                                                            default_file=default_file), 'w') as f:
-            f.write(model.get_model_default(args.heap, default_file))
+            f.write(model.get_model_default(args.heap))
             f.close()
         config.logger.info('{default_folder}/{default_file}'.format(default_folder=default_folder,
                                                                     default_file=default_file))
