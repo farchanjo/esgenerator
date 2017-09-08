@@ -1,0 +1,16 @@
+cluster.name: {clustername}
+node.name: {nodeName}
+node.master: {isMaster}
+node.data: {isData}
+script.inline: on
+script.indexed: on
+script.groovy.sandbox.enabled: false
+script.engine.groovy.indexed.aggs: true
+network.host: {networkIp}
+transport.tcp.port: {transportPort}
+http.port: {httpPort}
+discovery.zen.ping.multicast.enabled: true
+thread_pool.search.queue_size: 5000
+thread_pool.index.queue_size: 50001
+thread_pool.bulk.queue_size: 500
+thread_pool.get.queue_size: 5000
