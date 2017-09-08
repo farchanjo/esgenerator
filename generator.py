@@ -25,7 +25,8 @@ for ins in range(0, args.instances):
     # Renaming files
     es_config_folder = '{path}/elasticsearch-{ins}'.format(path=config.OUTOUT_FOLDER, ins=ins)
     node_name = '{host}-{type}.{inst}'.format(host=args.host, type=args.type, inst=ins)
-
+    systemd_folder = '{folder}/systemd/system'.format(folder=config.OUTOUT_FOLDER)
+    systemd_file = 'elasticsearch-{type}-{inst}'.format(type=args.type, inst=ins)
     # Creating output Folder
     if not os.path.exists(es_config_folder):
         os.mkdir(es_config_folder, 0755)
@@ -44,4 +45,10 @@ for ins in range(0, args.instances):
     with open(es_config_folder + '/logging.yml', 'w') as f:
         f.write(model.get_model_log())
         f.close()
+
+    if os.path.exists(systemd_folder):
+        with open('{folder}/{file}'.format(folder=systemd_folder, file=systemd_file)) as f:
+            f.write(model.get_model_systemd(ins))
+            f.close()
+        config.logger.info('{folder}/{file}'.format(folder=systemd_folder, file=systemd_file))
     config.logger.info('Files for {folder} created without erros'.format(folder=es_config_folder))

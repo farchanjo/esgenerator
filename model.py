@@ -22,3 +22,12 @@ def get_model_log():
             output += line
         esLogModel.close()
     return output
+
+
+def get_model_systemd(instance_number):
+    output = ''
+    with open(config.dir_path + '/essystemdmodel') as f:
+        for line in f:
+            output += line.format(ins=instance_number)
+        f.close()
+    return output
