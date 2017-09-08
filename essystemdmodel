@@ -6,12 +6,12 @@ After=network-online.target
 
 [Service]
 Environment=ES_HOME=/usr/share/elasticsearch
-Environment=CONF_DIR=/etc/elasticsearch
+Environment=CONF_DIR=/etc/elasticsearch-{ins}
 Environment=CONF_FILE=/etc/elasticsearch-{ins}/elasticsearch.yml
 Environment=DATA_DIR=/var/lib/elasticsearch/nd{ins}
 Environment=LOG_DIR=/var/log/elasticsearch
 Environment=PID_DIR=/var/run/elasticsearch
-EnvironmentFile=-/etc/default/elasticsearch-node
+EnvironmentFile=-/etc/default/{defaultfile}
 
 User=elasticsearch
 Group=elasticsearch

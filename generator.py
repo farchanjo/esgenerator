@@ -15,6 +15,7 @@ parser.add_argument('--hport', type=int, help='Set Http Port', required=True)
 parser.add_argument('--cluster', type=str, help='Set Clusters Name', required=True)
 parser.add_argument('--master', type=bool, help='Is Master', required=True)
 parser.add_argument('--node', type=bool, help='Is Node Data', required=True)
+parser.add_argument('--heap', type=bool, help='Heap Size', required=True)
 parser.add_argument('--type', type=str, help='Choose (ND|MST|QR)', required=True)
 args = parser.parse_args()
 
@@ -26,7 +27,18 @@ for ins in range(0, args.instances):
     es_config_folder = '{path}/elasticsearch-{ins}'.format(path=config.OUTOUT_FOLDER, ins=ins)
     node_name = '{host}-{type}.{inst}'.format(host=args.host, type=args.type, inst=ins)
     systemd_folder = '{folder}/systemd/system'.format(folder=config.OUTOUT_FOLDER)
+    default_folder = '{folder}/default'.format(folder=config.OUTOUT_FOLDER)
     systemd_file = 'elasticsearch-{type}-{inst}'.format(type=args.type, inst=ins)
+    # Choosing default file
+    if args.type == 'ND':
+        default_file = 'elasticsearch-node'
+    elif args.type == 'QR':
+        default_file = 'elasticsearch-query'
+    elif args.type == 'MST':
+        default_file = 'elasticsearch-master'
+    else:
+        default_file = 'elasticsearch'
+
     # Creating output Folder
     if not os.path.exists(es_config_folder):
         os.mkdir(es_config_folder, 0755)
@@ -51,4 +63,12 @@ for ins in range(0, args.instances):
             f.write(model.get_model_systemd(ins))
             f.close()
         config.logger.info('{folder}/{file}'.format(folder=systemd_folder, file=systemd_file))
+
+    if os.path.exists(default_folder):
+        with open('{default_folder}/{default_file}'.format(default_folder=default_folder,
+                                                           default_file=default_file), 'w') as f:
+            f.write(model.get_model_default(args.heap, default_file))
+            f.close()
+        config.logger.info('{default_folder}/{default_file}'.format(default_folder=default_folder,
+                                                                    default_file=default_file))
     config.logger.info('Files for {folder} created without erros'.format(folder=es_config_folder))
