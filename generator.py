@@ -60,7 +60,7 @@ for ins in range(0, args.instances):
 
     if os.path.exists(systemd_folder):
         with open('{folder}/{file}.service'.format(folder=systemd_folder, file=systemd_file), 'w') as f:
-            f.write(model.get_model_systemd(ins))
+            f.write(model.get_model_systemd(ins, default_file))
             f.close()
         config.logger.info('{folder}/{file}'.format(folder=systemd_folder, file=systemd_file))
 

@@ -24,11 +24,11 @@ def get_model_log():
     return output
 
 
-def get_model_systemd(instance_number):
+def get_model_systemd(instance_number, defaultfile):
     output = ''
     with open(config.dir_path + '/essystemdmodel') as f:
         for line in f:
-            output += line.format(ins=instance_number)
+            output += line.format(ins=instance_number, defaultfile=defaultfile)
         f.close()
     return output
 
